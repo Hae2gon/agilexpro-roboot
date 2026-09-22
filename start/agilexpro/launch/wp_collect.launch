@@ -1,0 +1,7 @@
+<launch>
+    <!-- 1.2D Pose打点采集程序（输入save自动存yaml+自动出标注地图） -->
+    <node name="wp_collect_node" pkg="agilexpro" type="wp_collect_rviz.py" output="screen"/>
+    <!-- 2.静态点位预览（读取yaml，RViz实时显示已有点位，和nav里marker不冲突） -->
+    <node name="collect_preview_marker" pkg="agilexpro" type="wp_marker_show.py" output="screen"/>
+</launch>
+

@@ -1,0 +1,60 @@
+DWAPlannerROS:
+# ==========================================
+# 速度限制：防抖核心！低速、小转向、不抽搐
+# ==========================================
+  max_vel_trans: 0.3
+  min_vel_trans: 0.08
+  
+  max_vel_x: 0.3
+  min_vel_x: 0.08
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+  
+  max_vel_theta: 0.4
+  min_vel_theta: 0.12
+
+# ==========================================
+# 加速度：防抖关键！不能太大，否则必抖
+# ==========================================
+  acc_lim_x: 0.4
+  acc_lim_y: 0.0
+  acc_lim_th: 0.6
+  acc_lim_trans: 0.4
+
+# ==========================================
+# 评分权重（不转圈、不摇头、直着走）
+# ==========================================
+  path_distance_bias: 8.0
+  goal_distance_bias: 12.0
+  occdist_scale: 0.03
+
+# ==========================================
+# 其他设置
+# ==========================================
+  forward_point_distance: 0.0
+  stop_time_buffer: 0.3
+  scaling_speed: 0.25
+  max_scaling_factor: 0.2
+
+# ==========================================
+# 采样点
+# ==========================================
+  sim_time: 1.5
+  vx_samples: 12
+  vy_samples: 0
+  vth_samples: 20
+
+# ==========================================
+# 容忍度（防抖必须放宽）
+# ==========================================
+  xy_goal_tolerance: 0.6
+  yaw_goal_tolerance: 0.3
+  latch_xy_goal_tolerance: true
+  yaw_goal_tolerance: 0.35
+  trans_stopped_vel: 0.1
+  theta_stopped_vel: 0.1
+
+  use_dwa: true
+  restore_defaults: false
+  prune_plan: false
+

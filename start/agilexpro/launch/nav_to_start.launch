@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node name="goto_start_point" 
+        pkg="agilexpro" 
+        type="init_waypoint.py" 
+        output="screen"
+        cwd="node"/>
+</launch>
+

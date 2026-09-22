@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="shengjiang_control_node" pkg="agilexpro" type="shengjiang.py" output="screen" />
+    <node name="pantilt_control_node" pkg="agilexpro" type="pantilt_control_node" output="screen" />
+</launch>

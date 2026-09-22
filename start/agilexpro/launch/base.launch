@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find yhs_can_control)/launch/yhs_can_control.launch"/>
+    <include file="$(find agilexpro)/launch/open_lidar.launch"/>
+</launch>

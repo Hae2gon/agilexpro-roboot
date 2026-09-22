@@ -1,0 +1,60 @@
+<?xml version="1"?>
+<!-- 
+  Simulate a carlike robot with the teb_local_planner in stage:
+  - stage
+  - map_server
+  - move_base
+  - static map
+  - amcl
+  - rviz view
+ -->
+<launch>
+	
+	<param name="planner_frequency" value="0.5"/>
+	
+        <!--  ************** Navigation ***************  -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find agilexpro)/param/4wd/costmap_common_params.yaml" command="load" ns="global_costmap" />
+
+    <rosparam file="$(find agilexpro)/param/4wd/costmap_common_params.yaml" command="load" ns="local_costmap" />
+
+    <rosparam file="$(find agilexpro)/param/4wd/local_costmap_params.yaml" command="load" />
+
+    <rosparam file="$(find agilexpro)/param/4wd/global_costmap_params.yaml" command="load" />
+
+    <rosparam file="$(find agilexpro)/param/4wd/base_local_planner_params.yaml" command="load" />
+
+    <rosparam file="$(find agilexpro)/param/4wd/move_base_params.yaml" command="load" />
+
+    <node pkg="agilexpro" type="cmd_vel_to_yhs.py" name="cmd_vel_converter" output="screen" />
+    <remap from="/cmd_vel" to="/smoother_cmd_vel"/>
+</node> 
+
+	<!--  ****** Maps *****  -->
+
+  <!--node name="odom_to_amcl_node" pkg="agilexpro" type="odom_to_amcl_node" output="screen"/-->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find agilexpro)/maps/0525.yaml" output="screen">
+	  <!--node name="map_server" pkg="map_server" type="map_server" args="~/agilex_ws/agilex_ws/src/start/agilexpro/maps/0525.yaml" output="screen">-->
+      <param name="frame_id" value="world"/>
+        </node>
+
+	<node pkg="amcl" type="amcl" name="amcl" output="screen">
+                <rosparam file="$(find agilexpro)/param/amcl_params.yaml" command="load" />
+      		<param name="initial_pose_x"            value="0"/>
+      		<param name="initial_pose_y"            value="0"/>
+		<param name="initial_pose_a"            value="0"/>
+	</node>
+
+<node name="waypoints_marker_show" pkg="agilexpro" type="wp_marker_show.py" output="screen"/>
+
+  <!--  **************** Visualisation ****************  -->
+  <node name="car_rviz" pkg="rviz" type="rviz" args="-d $(find agilexpro)/rviz/slam.rviz">
+  </node>
+  <include file="$(find agilexpro)/launch/volecity_smoother.launch"/>
+  
+
+
+  <!--include file="$(find scout_bringup)/launch/scout_robot_base.launch"-->
+  <!--/include-->
+</launch>
+

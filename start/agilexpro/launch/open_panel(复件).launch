@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="navigation_status_listener" pkg="agilexpro" type="shengjiang.py" args="-d $(find agilexpro)/rviz/slam.rviz" />
+</launch>

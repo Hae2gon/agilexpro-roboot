@@ -1,0 +1,4 @@
+<launch>
+  <node name="step_nav" pkg="agilexpro" type="wp_step_nav.py" output="screen"/>
+</launch>
+

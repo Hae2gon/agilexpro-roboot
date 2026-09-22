@@ -1,0 +1,31 @@
+DWAPlannerROS:
+# ========== 速度限制 ==========
+max_vel_x: 0.3                # 最大前进速度，履带0.3起步稳
+min_vel_x: 0.0                # 允许完全停下  
+max_vel_theta: 0.3            # 最大旋转速度，履带绝对不能超过0.5
+min_vel_theta: 0.0            # 允许不转，避免被迫原地打转 
+# ========== 加速度 ==========
+acc_lim_x: 0.2                # 线加速度，决定"多快提到最高速"
+acc_lim_th: 0.2               # 角加速度，决定"多快达到最高旋转"
+acc_lim_y: 0.0                # 履带无横移
+# ========== 采样点 ========== 
+vx_samples: 10                # 线速度采样数
+vy_samples: 0
+vth_samples: 5                # 角速度采样数，履带一定要少！
+# ========== 仿真参数 ==========
+sim_time: 3.0                 # 向前模拟3秒，提前预判减速 
+sim_granularity: 0.05         # 仿真步长，适当降低计算量
+forward_point_distance: 0.4   # 前视距离，比原来翻倍，减少短视纠正
+# ========== 评分权重 ==========
+path_distance_bias: 40.0      # 贴合路径权重（主力）
+goal_distance_bias: 10.0      # 接近目标权重（辅助）
+occdist_scale: 0.03           # 避障权重
+# ========== 目标容忍度 ==========
+xy_goal_tolerance: 1.0       # 距离目标( )m算到达
+yaw_goal_tolerance: 0.3       # 角度差0.1rad（≈6°）就算到达
+# ========== 其他 ==========
+stop_time_buffer: 0.2
+scaling_speed: 0.25 
+max_scaling_factor: 0.5       # 速度缩放因子，从0.2改大，避免速度抽风
+prune_plan: false              # 清理身后路径点，减轻CPU
+use_dwa: true
